@@ -1,0 +1,60 @@
+<style>
+
+@font-face {
+        font-family: "Futura";
+        src: url("futura-tot-bold-oblique.ttf") format("truetype");
+    }
+
+body {
+    font-family: "Futura";
+}
+
+canvas {
+    width: 300px;
+    height: 200px;
+    border: 2px solid black;
+    
+}
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    hihi
+    <canvas id="myCanvas">
+
+
+    </canvas>
+
+<script>
+let canvas = document.getElementById("myCanvas");
+let context = canvas.getContext("2d");
+context.fillStyle = "#FF0000";
+context.fillRect(0, 0,300,200); // x, y, width, height
+// Upper left hand corner is (0,0) (x,y)
+// So this says start at top left corner and draw a 300x200 rectangle
+context.moveTo(0,0);
+context.lineTo(300,150);
+context.stroke();
+
+//Text
+context.fillStyle = "#FFFFFF";
+context.font = "30px Futura";
+context.fillText("Meme", 10, 50);
+// Stroketext
+context.font = "50px Impact";
+context.strokeStyle = "#FFFFFF"
+context.lineWidth = 100;
+context.fillText("Nomeme", 10, 90);
+context.strokeText("Nomeme", 10, 90);
+</script>
+
+</body>
+</html>

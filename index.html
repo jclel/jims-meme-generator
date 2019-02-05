@@ -1,0 +1,142 @@
+<style>
+
+
+@font-face {
+        font-family: "Futura";
+        src: url("futura-tot-bold-oblique.ttf") format("truetype");
+    }
+
+#header {
+    font-family: "Futura";
+    color: #0fbb09;
+    font-size: 36px;
+}
+
+canvas {
+
+    border: 2px solid black;
+   
+    
+}
+
+img {
+    height: 400px;
+    width: 600px;
+}
+
+#inputs {
+    padding: 2em 0;
+}
+
+input {
+    font-size: 24px;
+    border: none;
+    border-bottom: solid 1px #348a31;
+    padding: 5px;
+}
+
+#inputText {
+    height: 50px;
+    width: 200px;
+}
+
+#fontSize {
+    width: 270px;
+}
+
+button {
+    border: none;
+    font-size: 24px;
+    background-color: #0fbb09;
+    color: white;
+    height: 50px;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: black;
+}
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jim's Meme Generator</title>
+</head>
+<body>
+<div class="container">
+
+<p id="header">
+    Jim's Meme Generator
+</p>
+<p id="description">
+    Enter text below and let 'er rip.
+</p>
+
+    <img src="jim-template3.png" alt="test" id="template" height="400px" width="600px" hidden>
+<div id="inputs">
+    <input type="text" id="inputText" placeholder="text here">
+    <button onClick="makeMeme()">Make Meme</button>
+    <br>
+    <input type="text" id="fontSize" placeholder="font size (default 140px)">
+</div>
+    <canvas id="memeGenerator" height="609px" width="800px">
+
+    </canvas>
+</div>
+
+
+<footer>
+    <p>
+        this generator made by <a href="https://twitter.com/jakeclelandVEVO">@jakeclelandVEVO</a> GANG
+    </p>
+    <p>
+        <a href="https://github.com/rmit-jc/">git it git it grrl</a>
+    </p>
+</footer>
+
+<script>
+window.onload = function() {
+const canvas = document.getElementById("memeGenerator");
+const context = canvas.getContext("2d");
+
+const img = document.getElementById("template");
+img.height = 400;
+img.width = 400;
+context.drawImage(img, 0, 0);
+
+context.font = "140px Futura";
+context.fillStyle = "#007736";
+context.fillText("Jim's", 35, 395);
+
+};
+
+function makeMeme() {
+const canvas = document.getElementById("memeGenerator");
+const context = canvas.getContext("2d");
+const text = document.getElementById("inputText").value;
+
+// context.font = "210px Futura";
+// context.fillStyle = "#FFFF00";
+// context.fillText(text, 30, 600);
+
+fontSize = document.getElementById("fontSize").value;
+if(fontSize) {
+    context.font = context.font.replace(/\d+px/, fontSize);
+} else {
+    context.font = "140px Futura";
+}
+
+// context.font = "140px Futura";
+context.fillStyle = "#007736";
+
+context.fillText(text, 170, 520);
+
+};
+</script>
+</body>
+</html>
