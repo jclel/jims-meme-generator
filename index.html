@@ -57,6 +57,10 @@ button:hover {
     background-color: black;
 }
 
+@media screen and (max-width: 600px) {
+
+}
+
 </style>
 
 <!DOCTYPE html>
@@ -87,7 +91,7 @@ button:hover {
 <div id="inputs">
     <input type="text" id="inputText" placeholder="text here">
     <button onClick="makeMeme()">Make Meme</button>
-    <button oncClick="clearText()">Clear</button>
+    <button onClick="clearText()">Reset</button>
     <br>
     <input type="text" id="fontSize" placeholder="font size (default 140px)">
 </div>
@@ -109,6 +113,7 @@ button:hover {
 <script>
 const canvas = document.getElementById("memeGenerator");
 const context = canvas.getContext("2d");
+const text = document.getElementById("inputText").value;
 
 window.onload = function() {
 const img = document.getElementById("template");
@@ -121,8 +126,6 @@ context.fillText("Jim's", 35, 395);
 };
 
 function makeMeme() {
-const text = document.getElementById("inputText").value;
-
 // Update font size if specified
 fontSize = document.getElementById("fontSize").value;
 if(fontSize) {
@@ -138,8 +141,11 @@ context.fillText(text, 170, 520);
 };
 
 function clearText() {
-
-context.clearRect(0, 0, 1000, 1050);
+//context.clearRect(150, 400, 770, 520);
+context.fillStyle = "#FFFFFF";
+context.strokeStyle = "#FFFFFF";
+context.fillText(text, 170, 520);
+context.strokeText(text, 170, 520);
 };
 </script>
 </body>
