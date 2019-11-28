@@ -28,11 +28,15 @@ img {
     padding: 2em 0;
 }
 
-input {
+input, label {
     font-size: 24px;
     border: none;
     border-bottom: solid 1px #007736;
     padding: 5px;
+}
+
+label {
+    color: #777;
 }
 
 #inputText {
@@ -87,13 +91,15 @@ button:hover {
     Enter text below and let 'er rip.
 </p>
 
-    <img src="jim-template3.png" alt="test" id="template" height="400px" width="600px" hidden>
 <div id="inputs">
     <input type="text" id="inputText" placeholder="text here">
     <button onClick="makeMeme()">Make Meme</button>
     <button onClick="clearText()">Reset</button>
     <br>
     <input type="text" id="fontSize" placeholder="font size (default 140px)">
+    <br>
+    <label for="colorPicker">Pick a Color</label>
+    <input type="color" name="colorPicker" id="colorPicker" value="#007736">
 </div>
     <canvas id="memeGenerator" height="609px" width="800px">
 
@@ -113,39 +119,43 @@ button:hover {
 <script>
 const canvas = document.getElementById("memeGenerator");
 const context = canvas.getContext("2d");
-const text = document.getElementById("inputText").value;
+const colorPicker = document.getElementById("colorPicker");
+const img = new Image();
 
 window.onload = function() {
-const img = document.getElementById("template");
-context.drawImage(img, 0, 0);
-
-context.font = "140px Futura";
-context.fillStyle = "#007736";
-context.fillText("Jim's", 35, 395);
-
+    img.onload = function() {
+        makeMeme();
+    }
+    img.src = 'jim-logo.png';
 };
 
-function makeMeme() {
-// Update font size if specified
-fontSize = document.getElementById("fontSize").value;
-if(fontSize) {
-    context.font = context.font.replace(/\d+px/, fontSize);
-} else {
-    context.font = "140px Futura";
+function getColor() {
+    return colorPicker.value;
 }
 
-context.fillStyle = "#007736";
+function makeMeme() {
+    const text = document.getElementById("inputText").value;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = getColor();
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-context.fillText(text, 170, 520);
+    // // set composite mode
+    context.globalCompositeOperation = 'destination-in';
 
-};
+    context.drawImage(img, 0, 0);
+    context.globalCompositeOperation = "source-over";
 
-function clearText() {
-//context.clearRect(150, 400, 770, 520);
-context.fillStyle = "#FFFFFF";
-context.strokeStyle = "#FFFFFF";
-context.fillText(text, 170, 520);
-context.strokeText(text, 170, 520);
+    context.font = "140px Futura";
+    context.fillText("Jim's", 35, 395);
+    // Update font size if specified
+    fontSize = document.getElementById("fontSize").value;
+    if(fontSize) {
+        context.font = context.font.replace(/\d+px/, fontSize);
+    } else {
+        context.font = "140px Futura";
+    }
+
+    context.fillText(text, 170, 520);
 };
 </script>
 </body>
